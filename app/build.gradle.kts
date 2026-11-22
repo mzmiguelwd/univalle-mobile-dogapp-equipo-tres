@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.ksp) // Room
+    alias(libs.plugins.androidx.navigation.safeargs)
 }
 
 android {
@@ -42,15 +44,33 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 
-    // Navigation
+    // Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
+    // Navigation, Lifecycle, Biometrics
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
-    // Lottie
-    implementation(libs.lottie)
-
-    // Biometrics
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.biometric)
+
+    // Lottie e images
+    implementation(libs.lottie)
+    implementation(libs.coil)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    // CardView y RecyclerView
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.recyclerview)
 
     // Testing
     testImplementation(libs.junit)

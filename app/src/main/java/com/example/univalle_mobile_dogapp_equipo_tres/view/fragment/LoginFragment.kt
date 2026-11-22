@@ -9,6 +9,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.univalle_mobile_dogapp_equipo_tres.R
 import com.example.univalle_mobile_dogapp_equipo_tres.databinding.FragmentLoginBinding
 
@@ -60,6 +61,7 @@ class LoginFragment : Fragment() {
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
 
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
