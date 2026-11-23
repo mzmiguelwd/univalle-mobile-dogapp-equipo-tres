@@ -19,6 +19,9 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
     private val _selectedAppointment = MutableLiveData<Appointment?>()
     val selectedAppointment: LiveData<Appointment?> = _selectedAppointment
 
+    private val _breeds = MutableLiveData<List<String>>()
+    val breeds: LiveData<List<String>> = _breeds
+
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -35,6 +38,13 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
         val dao = AppointmentDB.getDatabase(application).appointmentDao()
         repository = AppointmentRepository(dao)
         allAppointments = repository.allAppointments
+    }
+
+    fun loadBreeds() {
+        if (!_breeds.value.isNullOrEmpty()) return
+        viewModelScope.launch {
+            _breeds.value = repository.getAllBreeds()
+        }
     }
 
     fun createAppointment(
