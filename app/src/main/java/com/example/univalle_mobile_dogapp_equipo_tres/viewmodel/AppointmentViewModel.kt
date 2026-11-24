@@ -56,13 +56,14 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
     ) {
         viewModelScope.launch {
             _isLoading.value = true
+            val imageUrl = repository.getDogImageByBreed(breed)
             val appointment = Appointment(
                 petName = petName.trim(),
                 breed = breed.trim(),
                 ownerName = ownerName.trim(),
                 phone = phone.trim(),
                 symptom = symptom,
-                imageUrl = ""
+                imageUrl = imageUrl
             )
             repository.insertAppointment(appointment)
             _isLoading.value = false
