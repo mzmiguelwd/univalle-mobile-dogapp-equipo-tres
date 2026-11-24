@@ -32,7 +32,16 @@
     <fragment
         android:id="@+id/appointmentDetailFragment"
         android:name="com.example.univalle_mobile_dogapp_equipo_tres.view.fragment.AppointmentDetailFragment"
-        android:label="AppointmentDetailFragment" />
+        android:label="AppointmentDetailFragment">
+        <action
+            android:id="@+id/action_appointmentDetailFragment_to_editAppointmentFragment"
+            app:destination="@id/editAppointmentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editAppointmentFragment"
+        android:name="com.example.univalle_mobile_dogapp_equipo_tres.view.fragment.EditAppointmentFragment"
+        android:label="EditAppointmentFragment" />
 
     <fragment
         android:id="@+id/newAppointmentFragment"
