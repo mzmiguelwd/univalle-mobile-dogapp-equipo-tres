@@ -115,12 +115,19 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
         viewModelScope.launch {
             _isLoading.value = true
             val trimmedBreed = breed.trim()
+            val breedChanged = !trimmedBreed.equals(original.breed.trim(), ignoreCase = true)
+            val updatedImageUrl = if (breedChanged || original.imageUrl.isBlank()) {
+                repository.getDogImageByBreed(trimmedBreed)
+            } else {
+                original.imageUrl
+            }
 
             val updatedAppointment = original.copy(
                 petName = petName.trim(),
                 breed = trimmedBreed,
                 ownerName = ownerName.trim(),
-                phone = phone.trim()
+                phone = phone.trim(),
+                imageUrl = updatedImageUrl
             )
             repository.updateAppointment(updatedAppointment)
             _selectedAppointment.value = updatedAppointment
